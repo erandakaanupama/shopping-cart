@@ -1,0 +1,26 @@
+DROP SCHEMA IF EXISTS `shoping-cart`;
+
+CREATE SCHEMA `shoping-cart`;
+USE `shoping-cart`;
+
+DROP TABLE IF EXISTS`cart`;
+
+CREATE TABLE `cart`(
+	`id` INT(11) NOT NULL AUTO_INCREMENT, 
+	PRIMARY KEY(`id`)
+)ENGINE=InnoDB AUTO_INCREMENT = 1 CHARSET=latin1;
+
+DROP TABLE IF EXISTS `customer`;
+
+CREATE TABLE `customer`(
+	`id` INT(11) NOT NULL AUTO_INCREMENT, 
+    `name` VARCHAR(50) DEFAULT NULL, 
+    `address` VARCHAR (100) DEFAULT NULL, 
+    `telephone_no` VARCHAR(15) DEFAULT NULL, 
+    `cart_id` INT(11) DEFAULT NULL, 
+    PRIMARY KEY(`id`), 
+    KEY `FK_CART_idx` (`cart_id`), 
+    CONSTRAINT `FK_CART` FOREIGN KEY(`cart_id`) 
+    REFERENCES `cart`(`id`)
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+)ENGINE = InnoDB AUTO_INCREMENT = 1 CHARSET = latin1;
